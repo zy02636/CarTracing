@@ -21,5 +21,11 @@ class ViewController: UIViewController {
     }
 
 
+    //MARK : - Private Funcs
+    @IBAction func historyBtnClick() {
+        let historyViewController = HistoryViewController(nibName: "HistoryViewController", bundle: nil)
+        self.presentViewController(historyViewController, animated: true, completion: nil)
+    }
+    
 }
 

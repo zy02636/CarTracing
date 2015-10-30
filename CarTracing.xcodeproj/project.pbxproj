@@ -14,6 +14,8 @@
 		2C8172771BE36F46001C2E65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8172751BE36F46001C2E65 /* LaunchScreen.storyboard */; };
 		2C8172821BE36F46001C2E65 /* CarTracingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8172811BE36F46001C2E65 /* CarTracingTests.swift */; };
 		2C81728D1BE36F46001C2E65 /* CarTracingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81728C1BE36F46001C2E65 /* CarTracingUITests.swift */; };
+		2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		2C8172881BE36F46001C2E65 /* CarTracingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CarTracingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C81728C1BE36F46001C2E65 /* CarTracingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarTracingUITests.swift; sourceTree = "<group>"; };
 		2C81728E1BE36F46001C2E65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
+		2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 		2C81726B1BE36F46001C2E65 /* CarTracing */ = {
 			isa = PBXGroup;
 			children = (
+				2C81729A1BE3709D001C2E65 /* History */,
 				2C81726C1BE36F46001C2E65 /* AppDelegate.swift */,
 				2C81726E1BE36F46001C2E65 /* ViewController.swift */,
 				2C8172701BE36F46001C2E65 /* Main.storyboard */,
@@ -123,6 +128,15 @@
 				2C81728E1BE36F46001C2E65 /* Info.plist */,
 			);
 			path = CarTracingUITests;
+			sourceTree = "<group>";
+		};
+		2C81729A1BE3709D001C2E65 /* History */ = {
+			isa = PBXGroup;
+			children = (
+				2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */,
+				2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */,
+			);
+			path = History;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -231,6 +245,7 @@
 				2C8172771BE36F46001C2E65 /* LaunchScreen.storyboard in Resources */,
 				2C8172741BE36F46001C2E65 /* Assets.xcassets in Resources */,
 				2C8172721BE36F46001C2E65 /* Main.storyboard in Resources */,
+				2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */,
 				2C81726F1BE36F46001C2E65 /* ViewController.swift in Sources */,
 				2C81726D1BE36F46001C2E65 /* AppDelegate.swift in Sources */,
 			);
