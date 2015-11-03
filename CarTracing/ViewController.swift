@@ -30,8 +30,11 @@ class ViewController: UIViewController {
     
     //Go to History page
     @IBAction func historyBtnClick() {
-        let historyViewController = HistoryViewController(nibName: "HistoryViewController", bundle: nil)
-        self.presentViewController(historyViewController, animated: true, completion: nil)
+//        let historyViewController = HistoryViewController(nibName: "HistoryViewController", bundle: nil)
+//        self.presentViewController(historyViewController, animated: true, completion: nil)
+        let historyTableViewController = HistoryTableViewController()
+        self.presentViewController(historyTableViewController, animated: true, completion: nil)
+
     }
     
     
