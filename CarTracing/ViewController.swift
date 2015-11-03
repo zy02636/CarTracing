@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+
 class ViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
@@ -26,10 +27,17 @@ class ViewController: UIViewController {
 
 
     //MARK : - Private Funcs
+    
+    //Go to History page
     @IBAction func historyBtnClick() {
         let historyViewController = HistoryViewController(nibName: "HistoryViewController", bundle: nil)
         self.presentViewController(historyViewController, animated: true, completion: nil)
     }
     
+    
+    //GPS start/stop
+    @IBAction func traceBtnClick() {
+    
+    }
 }
 

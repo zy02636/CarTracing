@@ -16,6 +16,7 @@
 		2C81728D1BE36F46001C2E65 /* CarTracingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81728C1BE36F46001C2E65 /* CarTracingUITests.swift */; };
 		2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */; };
 		2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */; };
+		2CA9A22C1BE8A8FE0049C497 /* TracePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9A22B1BE8A8FE0049C497 /* TracePart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		2C81728E1BE36F46001C2E65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		2CA9A22B1BE8A8FE0049C497 /* TracePart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracePart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		2C81726B1BE36F46001C2E65 /* CarTracing */ = {
 			isa = PBXGroup;
 			children = (
+				2CA9A22A1BE8A83E0049C497 /* Trace */,
 				2C81729A1BE3709D001C2E65 /* History */,
 				2C81726C1BE36F46001C2E65 /* AppDelegate.swift */,
 				2C81726E1BE36F46001C2E65 /* ViewController.swift */,
@@ -137,6 +140,14 @@
 				2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */,
 			);
 			path = History;
+			sourceTree = "<group>";
+		};
+		2CA9A22A1BE8A83E0049C497 /* Trace */ = {
+			isa = PBXGroup;
+			children = (
+				2CA9A22B1BE8A8FE0049C497 /* TracePart.swift */,
+			);
+			path = Trace;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,6 +281,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CA9A22C1BE8A8FE0049C497 /* TracePart.swift in Sources */,
 				2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */,
 				2C81726F1BE36F46001C2E65 /* ViewController.swift in Sources */,
 				2C81726D1BE36F46001C2E65 /* AppDelegate.swift in Sources */,
