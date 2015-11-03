@@ -18,6 +18,9 @@
 		2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */; };
 		2CA9A22C1BE8A8FE0049C497 /* TracePart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9A22B1BE8A8FE0049C497 /* TracePart.swift */; };
 		2CA9A2301BE8BB330049C497 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9A22F1BE8BB330049C497 /* HistoryTableViewController.m */; };
+		8D59F39D1BE8C44E00FF924D /* TravelHistoryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D59F39B1BE8C44E00FF924D /* TravelHistoryCell.m */; settings = {ASSET_TAGS = (); }; };
+		8D59F3A21BE8C99000FF924D /* TravelDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D59F3A01BE8C99000FF924D /* TravelDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		8D59F3A31BE8C99000FF924D /* TravelDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D59F3A11BE8C99000FF924D /* TravelDetailViewController.xib */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +60,11 @@
 		2CA9A22D1BE8BB320049C497 /* CarTracing-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CarTracing-Bridging-Header.h"; sourceTree = "<group>"; };
 		2CA9A22E1BE8BB330049C497 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
 		2CA9A22F1BE8BB330049C497 /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
+		8D59F39A1BE8C44E00FF924D /* TravelHistoryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelHistoryCell.h; sourceTree = "<group>"; };
+		8D59F39B1BE8C44E00FF924D /* TravelHistoryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelHistoryCell.m; sourceTree = "<group>"; };
+		8D59F39F1BE8C99000FF924D /* TravelDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TravelDetailViewController.h; sourceTree = "<group>"; };
+		8D59F3A01BE8C99000FF924D /* TravelDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TravelDetailViewController.m; sourceTree = "<group>"; };
+		8D59F3A11BE8C99000FF924D /* TravelDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TravelDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,11 @@
 				2CA9A22E1BE8BB330049C497 /* HistoryTableViewController.h */,
 				2CA9A22F1BE8BB330049C497 /* HistoryTableViewController.m */,
 				2CA9A22D1BE8BB320049C497 /* CarTracing-Bridging-Header.h */,
+				8D59F39A1BE8C44E00FF924D /* TravelHistoryCell.h */,
+				8D59F39B1BE8C44E00FF924D /* TravelHistoryCell.m */,
+				8D59F39F1BE8C99000FF924D /* TravelDetailViewController.h */,
+				8D59F3A01BE8C99000FF924D /* TravelDetailViewController.m */,
+				8D59F3A11BE8C99000FF924D /* TravelDetailViewController.xib */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -263,6 +276,7 @@
 			files = (
 				2C8172771BE36F46001C2E65 /* LaunchScreen.storyboard in Resources */,
 				2C8172741BE36F46001C2E65 /* Assets.xcassets in Resources */,
+				8D59F3A31BE8C99000FF924D /* TravelDetailViewController.xib in Resources */,
 				2C8172721BE36F46001C2E65 /* Main.storyboard in Resources */,
 				2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */,
 			);
@@ -293,6 +307,8 @@
 				2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */,
 				2C81726F1BE36F46001C2E65 /* ViewController.swift in Sources */,
 				2C81726D1BE36F46001C2E65 /* AppDelegate.swift in Sources */,
+				8D59F39D1BE8C44E00FF924D /* TravelHistoryCell.m in Sources */,
+				8D59F3A21BE8C99000FF924D /* TravelDetailViewController.m in Sources */,
 				2CA9A2301BE8BB330049C497 /* HistoryTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

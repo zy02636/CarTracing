@@ -7,12 +7,29 @@
 //
 
 #import "HistoryTableViewController.h"
+#import "TravelHistoryCell.h"
+#import "TravelDetailViewController.h"
 
 @interface HistoryTableViewController ()
+
+@property (nonatomic, retain) NSMutableArray* travelHistoryArray;
 
 @end
 
 @implementation HistoryTableViewController
+
+@synthesize travelHistoryArray;
+
+- (id) init {
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    
+    travelHistoryArray = [NSMutableArray arrayWithCapacity:20];
+    [travelHistoryArray addObject:@"北京天气"];
+    [travelHistoryArray addObject:@"对象2"];
+    [travelHistoryArray addObject:@"对象3"];
+    [travelHistoryArray addObject:@"对象4"];
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,9 +39,11 @@
     closeBtn.frame = CGRectMake(10, 20, 50, 20);
     [closeBtn setTitle:@"CLOSE" forState:UIControlStateNormal];
     [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:closeBtn];
     
-    
+    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 100, 50)];
+    [headerView addSubview:closeBtn];
+    self.tableView.tableHeaderView = headerView;
+
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -41,13 +60,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return travelHistoryArray.count;
 }
 
 
@@ -56,35 +73,54 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-/*
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 100;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    NSString* reuseIdentifier = @"Cell";
+    TravelHistoryCell *cell = (TravelHistoryCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
-    // Configure the cell...
+    if (cell == nil) {
+        cell = [[TravelHistoryCell alloc] initWithReuseIdentifier:reuseIdentifier];
+        UILabel* distanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 150, 20)];
+        distanceLabel.text     = @"今天我跑了1W公里.. 牛逼么?";
+        [cell addSubview:distanceLabel];
+    }
     
     return cell;
 }
-*/
 
-/*
+
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // Delete the row from the data source
+        [self.travelHistoryArray removeObjectAtIndex:[indexPath row]];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath) {
+        [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    }
+    NSString *idStr = [NSString stringWithFormat: @"My id is: %ld", (long)[indexPath row]];
+    TravelDetailViewController* detailViewController = [[TravelDetailViewController alloc] initWithTravelId:idStr];
+    
+    [self presentViewController:detailViewController animated:YES completion:nil];
+}
 
 /*
 // Override to support rearranging the table view.
