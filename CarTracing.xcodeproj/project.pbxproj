@@ -14,8 +14,8 @@
 		2C8172771BE36F46001C2E65 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8172751BE36F46001C2E65 /* LaunchScreen.storyboard */; };
 		2C8172821BE36F46001C2E65 /* CarTracingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8172811BE36F46001C2E65 /* CarTracingTests.swift */; };
 		2C81728D1BE36F46001C2E65 /* CarTracingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81728C1BE36F46001C2E65 /* CarTracingUITests.swift */; };
-		2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81729B1BE370CE001C2E65 /* HistoryViewController.swift */; };
+		2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C81729C1BE370CE001C2E65 /* HistoryViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -497,6 +497,7 @@
 				2C8172931BE36F46001C2E65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C8172941BE36F46001C2E65 /* Build configuration list for PBXNativeTarget "CarTracingTests" */ = {
 			isa = XCConfigurationList;
@@ -505,6 +506,7 @@
 				2C8172961BE36F46001C2E65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2C8172971BE36F46001C2E65 /* Build configuration list for PBXNativeTarget "CarTracingUITests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +515,7 @@
 				2C8172991BE36F46001C2E65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
