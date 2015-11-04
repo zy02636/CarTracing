@@ -45,8 +45,13 @@ class ViewController: UIViewController {
     @IBAction func historyBtnClick() {
 //        let historyViewController = HistoryViewController(nibName: "HistoryViewController", bundle: nil)
 //        self.presentViewController(historyViewController, animated: true, completion: nil)
-        let historyTableViewController = HistoryTableViewController()
-        self.presentViewController(historyTableViewController, animated: true, completion: nil)
+        let historyTableViewController = HistoryTableViewController(homeView: self)
+        
+        let naviController = UINavigationController(rootViewController: historyTableViewController)
+        let window = UIApplication.sharedApplication().keyWindow
+        window?.rootViewController = naviController
+        self.navigationController?.pushViewController(historyTableViewController, animated: true)
+        //self.presentViewController(historyTableViewController, animated: true, completion: nil)
 
     }
     

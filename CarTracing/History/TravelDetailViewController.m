@@ -31,12 +31,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(closeTravelDetail:)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
     // Do any additional setup after loading the view from its nib.
     infoLabel.text = idStr;
+    
+    
 }
 
 - (IBAction)closeTravelDetail:(id)sender {
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
