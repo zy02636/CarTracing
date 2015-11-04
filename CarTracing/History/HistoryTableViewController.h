@@ -10,4 +10,6 @@
 
 @interface HistoryTableViewController : UITableViewController
 
+- (id) initWithHomeView:(UIViewController*)homeView;
+
 @end

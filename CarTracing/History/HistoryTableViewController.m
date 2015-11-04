@@ -13,6 +13,7 @@
 @interface HistoryTableViewController ()
 
 @property (nonatomic, retain) NSMutableArray* travelHistoryArray;
+@property (nonatomic, retain) UIViewController* homeView;
 
 @end
 
@@ -20,7 +21,7 @@
 
 @synthesize travelHistoryArray;
 
-- (id) init {
+- (id) initWithHomeView:(UIViewController*)homeView {
     self = [super initWithStyle:UITableViewStyleGrouped];
     
     travelHistoryArray = [NSMutableArray arrayWithCapacity:20];
@@ -28,6 +29,8 @@
     [travelHistoryArray addObject:@"对象2"];
     [travelHistoryArray addObject:@"对象3"];
     [travelHistoryArray addObject:@"对象4"];
+
+    _homeView = homeView;
     return self;
 }
 
@@ -35,16 +38,18 @@
     [super viewDidLoad];
     
     
-    UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    closeBtn.frame = CGRectMake(10, 20, 50, 20);
-    [closeBtn setTitle:@"CLOSE" forState:UIControlStateNormal];
-    [closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    //UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+    //closeBtn.frame = CGRectMake(10, 20, 50, 20);
+    //[closeBtn setTitle:@"CLOSE" forState:UIControlStateNormal];
+    //[closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
-    UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 100, 50)];
-    [headerView addSubview:closeBtn];
-    self.tableView.tableHeaderView = headerView;
+    //UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 100, 50)];
+    //[headerView addSubview:closeBtn];
+    //self.tableView.tableHeaderView = headerView;
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
+    self.navigationItem.leftBarButtonItem = backButton;
 
-    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -69,8 +74,15 @@
 
 
 #pragma mark - Private Functions
-- (void)closeBtnClick {
-    [self dismissViewControllerAnimated:true completion:nil];
+- (void)backHome {
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+    
+    [UIView transitionWithView:window
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionFlipFromLeft
+                    animations:^{ window.rootViewController = _homeView; }
+                    completion:nil];
 }
 
 
@@ -119,7 +131,7 @@
     NSString *idStr = [NSString stringWithFormat: @"My id is: %ld", (long)[indexPath row]];
     TravelDetailViewController* detailViewController = [[TravelDetailViewController alloc] initWithTravelId:idStr];
     
-    [self presentViewController:detailViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 /*
