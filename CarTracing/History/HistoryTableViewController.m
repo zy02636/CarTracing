@@ -76,13 +76,16 @@
 #pragma mark - Private Functions
 - (void)backHome {
     //[self dismissViewControllerAnimated:YES completion:nil];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+//    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+//    
+//    [UIView transitionWithView:window
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{ window.rootViewController = _homeView; }
+//                    completion:nil];
     
-    [UIView transitionWithView:window
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{ window.rootViewController = _homeView; }
-                    completion:nil];
+    
+    [self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
 
