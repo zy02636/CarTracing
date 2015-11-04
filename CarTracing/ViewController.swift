@@ -13,13 +13,26 @@ import MapKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var mapView: MKMapView!
-
+    
+    var tracePart = TracePart()
+    //timer刷新UI用
+    var timer = NSTimer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,7 +53,11 @@ class ViewController: UIViewController {
     
     //GPS start/stop
     @IBAction func traceBtnClick() {
-    
+        
+        
+        
+        
+        tracePart.startTrace()
     }
 }
 
