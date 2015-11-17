@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HistoryLocationsViewController" customModule="CarTracing" customModuleProvider="target">
+            <connections>
+                <outlet property="tableView" destination="G7i-rT-5Ex" id="EyY-l9-ceC"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G7i-rT-5Ex">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="dtq-45-4ip"/>
+                        <outlet property="delegate" destination="-1" id="2M9-RJ-ems"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="G7i-rT-5Ex" secondAttribute="bottom" id="g73-HJ-OeW"/>
+                <constraint firstItem="G7i-rT-5Ex" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kL2-Sm-P9C"/>
+                <constraint firstAttribute="trailing" secondItem="G7i-rT-5Ex" secondAttribute="trailing" id="t4f-b3-fnf"/>
+                <constraint firstItem="G7i-rT-5Ex" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="v6z-vJ-fzP"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

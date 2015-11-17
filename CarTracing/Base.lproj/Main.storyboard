@@ -1,9 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7iR-w6-jyy">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="QFO-gb-AEg">
+            <objects>
+                <navigationController id="7iR-w6-jyy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LFz-RP-KEV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="0X7-VO-8Oi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YeS-KI-l5V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-377" y="380"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -20,20 +39,30 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <animations/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GB3-qK-QTv">
-                                <rect key="frame" x="20" y="550" width="64" height="30"/>
-                                <animations/>
-                                <state key="normal" title="HISTORY"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfb-8X-xSY">
+                                <rect key="frame" x="20" y="72" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vv-w4-3cL">
+                                <rect key="frame" x="20" y="101" width="75" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ll-R8-JOx">
+                                <rect key="frame" x="200" y="513" width="200" height="67"/>
+                                <color key="backgroundColor" red="0.96327611020000004" green="0.17734888979999999" blue="0.22563733550000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" secondItem="8Ll-R8-JOx" secondAttribute="width" multiplier="1:3" id="E8r-ii-83W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
-                                    <action selector="historyBtnClick" destination="BYZ-38-t0r" eventType="touchUpInside" id="3Kr-MO-WpL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ES2-yH-Dcu">
-                                <rect key="frame" x="536" y="550" width="44" height="30"/>
-                                <animations/>
-                                <state key="normal" title="BEGIN"/>
-                                <connections>
-                                    <action selector="traceBtnClick" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Pr-qJ-ii0"/>
+                                    <action selector="traceBtnClick" destination="BYZ-38-t0r" eventType="touchUpInside" id="6Aw-FG-jeN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -41,17 +70,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="h3Z-ZD-1Kc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="0aN-fx-5ow"/>
-                            <constraint firstItem="GB3-qK-QTv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="8qX-ek-Xcy"/>
+                            <constraint firstItem="vfb-8X-xSY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="1N8-fI-w6d"/>
+                            <constraint firstItem="8Ll-R8-JOx" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:3" id="1qA-ab-2Xv"/>
+                            <constraint firstItem="5Vv-w4-3cL" firstAttribute="top" secondItem="vfb-8X-xSY" secondAttribute="bottom" constant="8" id="I7i-jx-OGh"/>
+                            <constraint firstItem="5Vv-w4-3cL" firstAttribute="leading" secondItem="vfb-8X-xSY" secondAttribute="leading" id="JlW-mf-qpg"/>
                             <constraint firstAttribute="trailing" secondItem="h3Z-ZD-1Kc" secondAttribute="trailing" id="LLX-ke-jDh"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ES2-yH-Dcu" secondAttribute="bottom" constant="20" id="OF7-7W-l0Y"/>
+                            <constraint firstItem="8Ll-R8-JOx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OxX-e5-ljE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Ll-R8-JOx" secondAttribute="bottom" constant="20" id="SY8-A2-FRc"/>
                             <constraint firstItem="h3Z-ZD-1Kc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="UNE-dn-Eqw"/>
-                            <constraint firstAttribute="trailing" secondItem="ES2-yH-Dcu" secondAttribute="trailing" constant="20" id="WTh-8J-ORf"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="GB3-qK-QTv" secondAttribute="bottom" constant="20" id="fsb-p6-x78"/>
+                            <constraint firstItem="vfb-8X-xSY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gtF-TK-9hY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="h3Z-ZD-1Kc" secondAttribute="bottom" id="hMe-Wb-Z3F"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="nW6-id-hRW"/>
                     <connections>
+                        <outlet property="distanceLabel" destination="5Vv-w4-3cL" id="NEy-Zd-i6M"/>
                         <outlet property="mapView" destination="h3Z-ZD-1Kc" id="oLJ-hA-eTg"/>
+                        <outlet property="startBtn" destination="8Ll-R8-JOx" id="vF4-om-yhc"/>
+                        <outlet property="timeLabel" destination="vfb-8X-xSY" id="WtL-ya-hav"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
