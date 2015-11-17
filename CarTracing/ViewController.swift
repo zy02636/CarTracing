@@ -12,7 +12,7 @@ import CoreLocation
 import HealthKit
 
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLabel: UILabel!
@@ -35,6 +35,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let historyBtn : UIBarButtonItem = UIBarButtonItem(title: "History", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("historyBtnClick"))
         self.navigationItem.leftBarButtonItem = historyBtn
         startBtn.layer.cornerRadius = 5
+        
+        //Map
+        mapView.delegate = self
+        
         
         //LocationManager
         locationManager = CLLocationManager()
@@ -101,6 +105,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
+    
+    //Mark : - Overlay
+    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+        let polyline = overlay as! MKPolyline
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.strokeColor = UIColor.blueColor()
+        renderer.lineWidth = 3
+        return renderer
+
+    }
+    
+    
+    
+    
+    
     //MARK : - Private Funcs
     
     //Add Region
@@ -165,6 +184,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     
+    //画线路可视Region
+    func mapRegion() -> MKCoordinateRegion {
+        
+        let firstLocationDic = self.locations.first
+
+        var minLat = firstLocationDic!["latitude"]
+        var minLng = firstLocationDic!["longitude"]
+        var maxLat = minLat
+        var maxLng = minLng
+        for location in locations {
+            minLat = min(minLat!, location["latitude"]!)
+            minLng = min(minLng!, location["longitude"]!)
+            maxLat = max(maxLat!, location["latitude"]!)
+            maxLng = max(maxLng!, location["longitude"]!)
+            
+            
+        }
+        
+        return MKCoordinateRegion(
+            center: CLLocationCoordinate2D(latitude: (minLat! + maxLat!)/2,
+                longitude: (minLng! + maxLng!)/2),
+            span: MKCoordinateSpan(latitudeDelta: (maxLat! - minLat!)*1.1,
+                longitudeDelta: (maxLng! - minLng!)*1.1))
+    }
+    
+    
     //Refresh UI perSecond
     func eachSecond(timer: NSTimer) {
         seconds++
@@ -177,6 +222,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //        let paceUnit = HKUnit.secondUnit().unitDividedByUnit(HKUnit.meterUnit())
 //        let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: seconds / distance)
 //        paceLabel.text = "Pace: " + paceQuantity.description
+
+        
+        loadMap()
+        
     }
     
     
@@ -228,6 +277,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    
+    func polyline() -> MKPolyline {
+        var coords = [CLLocationCoordinate2D]()
+        
+
+        for location in locations {
+            coords.append(CLLocationCoordinate2D(latitude: location["latitude"]!,
+                longitude: location["longitude"]!))
+        }
+        
+        return MKPolyline(coordinates: &coords, count: locations.count)
+    }
+    
+    
+    func loadMap() {
+        if locations.count > 0 {
+
+            mapView.removeOverlays(mapView.overlays)
+            
+            // Set the map bounds
+//            mapView.region = mapRegion()
+            
+            // Make the line(s!) on the map
+            mapView.addOverlay(polyline())
+        }
+    }
     
 }
 
