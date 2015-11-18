@@ -100,7 +100,6 @@
         distanceLabel.text     = @"今天我跑了1W公里.. 牛逼么?";
         [cell addSubview:distanceLabel];
     }
-    
     return cell;
 }
 
