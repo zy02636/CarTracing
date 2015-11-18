@@ -9,6 +9,9 @@
 #import "HistoryTableViewController.h"
 #import "TravelHistoryCell.h"
 #import "TravelDetailViewController.h"
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import "CarTracing-Swift.h"
 
 @interface HistoryTableViewController ()
 
@@ -55,6 +58,15 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
+    
+    //取数据
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    travelHistoryArray = [NSMutableArray arrayWithArray:[userDefault objectForKey:@"saveDataArray"]];
+    [self.tableView reloadData];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,13 +88,16 @@
 #pragma mark - Private Functions
 - (void)backHome {
     //[self dismissViewControllerAnimated:YES completion:nil];
-    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+//    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
+//    
+//    [UIView transitionWithView:window
+//                      duration:0.5
+//                       options:UIViewAnimationOptionTransitionFlipFromLeft
+//                    animations:^{ window.rootViewController = _homeView; }
+//                    completion:nil];
     
-    [UIView transitionWithView:window
-                      duration:0.5
-                       options:UIViewAnimationOptionTransitionFlipFromLeft
-                    animations:^{ window.rootViewController = _homeView; }
-                    completion:nil];
+    
+    [self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
 
@@ -95,9 +110,23 @@
     TravelHistoryCell *cell = (TravelHistoryCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (cell == nil) {
+        
+        NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
+        NSDate *finishTime = [dataDic objectForKey:@"finish"];
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+        [formatter setTimeZone:timeZone];
+        [formatter setDateFormat : @"M/d/yyyy h:m a"];
+        NSString *stringTime = [formatter stringFromDate:finishTime];
+        
+        
+        
         cell = [[TravelHistoryCell alloc] initWithReuseIdentifier:reuseIdentifier];
-        UILabel* distanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 150, 20)];
-        distanceLabel.text     = @"今天我跑了1W公里.. 牛逼么?";
+        UILabel* distanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 300, 20)];
+//        distanceLabel.text     = @"今天我跑了1W公里.. 牛逼么?";
+        distanceLabel.text = stringTime;
         [cell addSubview:distanceLabel];
     }
     return cell;
@@ -127,10 +156,21 @@
     if (indexPath) {
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    NSString *idStr = [NSString stringWithFormat: @"My id is: %ld", (long)[indexPath row]];
-    TravelDetailViewController* detailViewController = [[TravelDetailViewController alloc] initWithTravelId:idStr];
+//    NSString *idStr = [NSString stringWithFormat: @"My id is: %ld", (long)[indexPath row]];
+//    TravelDetailViewController* detailViewController = [[TravelDetailViewController alloc] initWithTravelId:idStr];
+//    
+//    [self.navigationController pushViewController:detailViewController animated:YES];
     
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    
+    NSDictionary *locationDic = [travelHistoryArray objectAtIndex:indexPath.row];
+    HistoryLocationsViewController *locationViewController = [[HistoryLocationsViewController alloc] initWithNibName:@"HistoryLocationsViewController" bundle:nil];
+    NSArray *locations = locationDic[@"locations"];
+    locationViewController.dataArray = locations;
+    [self.navigationController pushViewController:locationViewController animated:YES];
+
+    
+    
+
 }
 
 /*
