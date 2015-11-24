@@ -111,13 +111,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let polyline = overlay as! MKPolyline
         let renderer = MKPolylineRenderer(polyline: polyline)
         renderer.strokeColor = UIColor.blueColor()
-        renderer.lineWidth = 3
+        renderer.lineWidth = 7
         return renderer
 
     }
-    
-    
-    
     
     
     //MARK : - Private Funcs
@@ -217,13 +214,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         timeLabel.text = "Time: " + secondsQuantity.description
         let distanceQuantity = HKQuantity(unit: HKUnit.meterUnit(), doubleValue: distance)
         distanceLabel.text = "Distance: " + distanceQuantity.description
-        
-        //Pace
-//        let paceUnit = HKUnit.secondUnit().unitDividedByUnit(HKUnit.meterUnit())
-//        let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: seconds / distance)
-//        paceLabel.text = "Pace: " + paceQuantity.description
 
-        
         loadMap()
         
     }
