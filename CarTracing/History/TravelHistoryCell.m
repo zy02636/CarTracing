@@ -27,4 +27,11 @@
     return self;
 }
 
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    for(UIView *subview in [self.contentView subviews]) {
+        [subview removeFromSuperview];
+    }
+}
+
 @end

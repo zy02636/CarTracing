@@ -111,14 +111,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let polyline = overlay as! MKPolyline
         let renderer = MKPolylineRenderer(polyline: polyline)
         renderer.strokeColor = UIColor.blueColor()
-        renderer.lineWidth = 3
+        renderer.lineWidth = 7
         return renderer
 
     }
     
-    
-    
-    
+    //take screenshot
+    func imageFromView(view: UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
+        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
+        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext();
+        return snapshot;
+    }
     
     //MARK : - Private Funcs
     
@@ -135,7 +140,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     //Go to History page
     func historyBtnClick() {
 
-        let historyTableViewController = HistoryTableViewController(homeView: self)
+        let historyTableViewController = HistoryTableViewController()
         let nav = UINavigationController(rootViewController: historyTableViewController)
         self.presentViewController(nav, animated: true, completion: nil)
         
@@ -217,13 +222,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         timeLabel.text = "Time: " + secondsQuantity.description
         let distanceQuantity = HKQuantity(unit: HKUnit.meterUnit(), doubleValue: distance)
         distanceLabel.text = "Distance: " + distanceQuantity.description
-        
-        //Pace
-//        let paceUnit = HKUnit.secondUnit().unitDividedByUnit(HKUnit.meterUnit())
-//        let paceQuantity = HKQuantity(unit: paceUnit, doubleValue: seconds / distance)
-//        paceLabel.text = "Pace: " + paceQuantity.description
 
-        
         loadMap()
         
     }
@@ -249,6 +248,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         //获取distance
         saveDic["distance"] = NSNumber(double: distance)
+        
+        
+        let data = UIImagePNGRepresentation(imageFromView(mapView))
+        let fileManager = NSFileManager.defaultManager()
+        let fileName = NSString(format:"path_%d.png", CACurrentMediaTime())
+        let filePath = NSHomeDirectory().stringByAppendingString("/Documents/").stringByAppendingString(fileName as String)
+        if !fileManager.fileExistsAtPath(filePath) {
+            data?.writeToFile(filePath, atomically: true)
+            NSLog("%@", filePath)
+        }else {
+            
+        }
+        
+        //保存截图路径
+        saveDic["image"] = filePath
+        //UIImageWriteToSavedPhotosAlbum(imageFromView(mapView), nil, nil, nil)
         
         let userDefault = NSUserDefaults.standardUserDefaults()
         var saveDataArray = [Dictionary<String, AnyObject>]()
