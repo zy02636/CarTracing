@@ -129,7 +129,6 @@
         distanceLabel.text = stringTime;
         [cell addSubview:distanceLabel];
     }
-    
     return cell;
 }
 
