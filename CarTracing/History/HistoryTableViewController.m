@@ -16,7 +16,6 @@
 @interface HistoryTableViewController ()
 
 @property (nonatomic, retain) NSMutableArray* travelHistoryArray;
-@property (nonatomic, retain) UIViewController* homeView;
 
 @end
 
@@ -24,42 +23,17 @@
 
 @synthesize travelHistoryArray;
 
-- (id) initWithHomeView:(UIViewController*)homeView {
-    self = [super initWithStyle:UITableViewStyleGrouped];
-    
+- (id) init {
     travelHistoryArray = [NSMutableArray arrayWithCapacity:20];
-    [travelHistoryArray addObject:@"北京天气"];
-    [travelHistoryArray addObject:@"对象2"];
-    [travelHistoryArray addObject:@"对象3"];
-    [travelHistoryArray addObject:@"对象4"];
-
-    _homeView = homeView;
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    //UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeSystem];
-    //closeBtn.frame = CGRectMake(10, 20, 50, 20);
-    //[closeBtn setTitle:@"CLOSE" forState:UIControlStateNormal];
-    //[closeBtn addTarget:self action:@selector(closeBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    
-    //UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 50, 100, 50)];
-    //[headerView addSubview:closeBtn];
-    //self.tableView.tableHeaderView = headerView;
+
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
     self.navigationItem.leftBarButtonItem = backButton;
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
     
     //取数据
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -87,47 +61,71 @@
 
 #pragma mark - Private Functions
 - (void)backHome {
-    //[self dismissViewControllerAnimated:YES completion:nil];
-//    UIWindow* window = [[UIApplication sharedApplication] keyWindow];
-//    
-//    [UIView transitionWithView:window
-//                      duration:0.5
-//                       options:UIViewAnimationOptionTransitionFlipFromLeft
-//                    animations:^{ window.rootViewController = _homeView; }
-//                    completion:nil];
-    
-    
     [self.navigationController dismissViewControllerAnimated:true completion:nil];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 100;
+    return 250;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString* reuseIdentifier = @"Cell";
+    NSString* reuseIdentifier = @"resueCell";
     TravelHistoryCell *cell = (TravelHistoryCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
     if (cell == nil) {
-        
-        NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
-        NSDate *finishTime = [dataDic objectForKey:@"finish"];
-        
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        NSTimeZone *timeZone = [NSTimeZone localTimeZone];
-        [formatter setTimeZone:timeZone];
-        [formatter setDateFormat : @"M/d/yyyy h:m a"];
-        NSString *stringTime = [formatter stringFromDate:finishTime];
-        
-        
-        
         cell = [[TravelHistoryCell alloc] initWithReuseIdentifier:reuseIdentifier];
-        UILabel* distanceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 300, 20)];
-//        distanceLabel.text     = @"今天我跑了1W公里.. 牛逼么?";
-        distanceLabel.text = stringTime;
-        [cell addSubview:distanceLabel];
+    }
+    
+    NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
+    NSDate *finishTime    = [dataDic objectForKey:@"finish"];
+    NSString* distStr     = [[dataDic objectForKey:@"distance"] stringValue];
+    NSString* costStr     = [[dataDic objectForKey:@"seconds"] stringValue];
+
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone    = [NSTimeZone localTimeZone];
+    [formatter setTimeZone:timeZone];
+    [formatter setDateFormat : @"yyyy年M月d日 h点m分"];
+    NSString *stringTime    = [formatter stringFromDate:finishTime];
+    NSString* distFormatStr = [NSString stringWithFormat:@"跑了%@米", distStr];
+    NSString* costFormatStr = [NSString stringWithFormat:@"耗时%@秒", costStr];
+    
+    
+    UILabel* timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 200, 20)];
+    timeLabel.text = stringTime;
+    [timeLabel setFont:[UIFont systemFontOfSize:13]];
+    
+    UILabel* distLabel = [[UILabel alloc] initWithFrame:CGRectMake(190, 10, 50, 20)];
+    distLabel.text = distFormatStr;
+    [distLabel setFont:[UIFont systemFontOfSize:13]];
+    
+    UILabel* costLabel = [[UILabel alloc] initWithFrame:CGRectMake(250, 10, 150, 20)];
+    costLabel.text = costFormatStr;
+    [costLabel setFont:[UIFont systemFontOfSize:13]];
+    
+    UIImage* pathImg     = [UIImage imageWithContentsOfFile:[dataDic objectForKey:@"image"]];
+    UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50, 200, 150)];
+    [imgView setImage:pathImg];
+    
+    [cell.contentView addSubview:distLabel];
+    [cell.contentView addSubview:costLabel];
+    [cell.contentView addSubview:timeLabel];
+    [cell.contentView addSubview:imgView];
+    
+    // Remove seperator inset
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    // Prevent the cell from inheriting the Table View's margin settings
+    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+    
+    // Explictly set your cell's layout margins
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     return cell;
 }
