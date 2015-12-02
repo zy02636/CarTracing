@@ -11,5 +11,5 @@
 @interface TravelHistoryCell : UITableViewCell
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
-
+- (void)dealWithData:(NSDictionary *)dataDic;
 @end

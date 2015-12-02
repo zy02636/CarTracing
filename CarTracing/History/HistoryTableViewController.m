@@ -14,6 +14,9 @@
 #import "CarTracing-Swift.h"
 #import "TravelDetailViewController.h"
 
+static NSString *cellIdentifier = @"TracelHistoryCell";
+
+
 @interface HistoryTableViewController ()
 
 @property (nonatomic, retain) NSMutableArray* travelHistoryArray;
@@ -32,9 +35,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
-    self.navigationItem.leftBarButtonItem = backButton;
+    //自定义视图
+    [self customSubViews];
     
     //取数据
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
@@ -48,6 +50,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)customSubViews {
+    
+    //Bar
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
+    self.navigationItem.leftBarButtonItem = backButton;
+    
+    
+    //TableView
+    [self.tableView registerClass:[TravelHistoryCell class] forCellReuseIdentifier:cellIdentifier];
+}
+
 
 #pragma mark - Table view data source
 
@@ -71,6 +85,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    TravelHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
+    [cell dealWithData:dataDic];
+    return cell;
+    
+    
+    
+    /*
     NSString* reuseIdentifier = @"resueCell";
     TravelHistoryCell *cell = (TravelHistoryCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
     
@@ -129,6 +153,10 @@
         [cell setLayoutMargins:UIEdgeInsetsZero];
     }
     return cell;
+     
+     
+     
+     */
 }
 
 

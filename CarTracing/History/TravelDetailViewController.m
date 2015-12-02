@@ -9,7 +9,9 @@
 #import "TravelDetailViewController.h"
 
 @interface TravelDetailViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+
+@property (weak, nonatomic) IBOutlet UIView *topCotentView;
+@property (weak, nonatomic) IBOutlet UIImageView *topImgView;
 @property (weak, nonatomic) IBOutlet UIView *leftContentView;
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
 
@@ -17,13 +19,15 @@
 
 @implementation TravelDetailViewController
 
-@synthesize imgView;
+@synthesize topImgView;
 @synthesize leftContentView;
 @synthesize rightContentView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    /*
     imgView.layer.borderColor = [UIColor grayColor].CGColor;
     imgView.layer.borderWidth = 3.0f;
     
@@ -32,6 +36,7 @@
     
     rightContentView.layer.borderColor = [UIColor grayColor].CGColor;
     rightContentView.layer.borderWidth = 3.0f;
+     */
 }
 
 - (void)didReceiveMemoryWarning {
