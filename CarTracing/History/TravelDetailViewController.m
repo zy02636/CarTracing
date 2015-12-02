@@ -2,47 +2,36 @@
 //  TravelDetailViewController.m
 //  CarTracing
 //
-//  Created by sogou on 15/11/3.
+//  Created by sogou on 15/12/1.
 //  Copyright © 2015年 li pengxuan. All rights reserved.
 //
 
 #import "TravelDetailViewController.h"
 
 @interface TravelDetailViewController ()
-
-@property (nonatomic, retain) IBOutlet UILabel* infoLabel;
-@property (nonatomic, retain) IBOutlet UIButton* closeBtn;
-@property (nonatomic, copy)  NSString* idStr;
+@property (weak, nonatomic) IBOutlet UIImageView *imgView;
+@property (weak, nonatomic) IBOutlet UIView *leftContentView;
+@property (weak, nonatomic) IBOutlet UIView *rightContentView;
 
 @end
 
-
 @implementation TravelDetailViewController
 
-@synthesize infoLabel;
-@synthesize idStr;
-
-- (id) initWithTravelId:(NSString*)travelID {
-    self = [super initWithNibName:@"TravelDetailViewController" bundle:nil];
-    idStr = travelID;
-    return self;
-}
-
+@synthesize imgView;
+@synthesize leftContentView;
+@synthesize rightContentView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(closeTravelDetail:)];
-    self.navigationItem.leftBarButtonItem = backButton;
-    
     // Do any additional setup after loading the view from its nib.
-    infoLabel.text = idStr;
+    imgView.layer.borderColor = [UIColor grayColor].CGColor;
+    imgView.layer.borderWidth = 3.0f;
     
+    leftContentView.layer.borderColor = [UIColor grayColor].CGColor;
+    leftContentView.layer.borderWidth = 3.0f;
     
-}
-
-- (IBAction)closeTravelDetail:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    rightContentView.layer.borderColor = [UIColor grayColor].CGColor;
+    rightContentView.layer.borderWidth = 3.0f;
 }
 
 - (void)didReceiveMemoryWarning {

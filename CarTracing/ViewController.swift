@@ -117,6 +117,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     }
     
 
+    
+
+    //MARK : - Private Funcs
+    
+    
     //take screenshot
     func imageFromView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0)
@@ -125,9 +130,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         UIGraphicsEndImageContext();
         return snapshot;
     }
-
-    
-    //MARK : - Private Funcs
     
     //Add Region
     func addRegion() {

@@ -12,6 +12,7 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import "CarTracing-Swift.h"
+#import "TravelDetailViewController.h"
 
 @interface HistoryTableViewController ()
 
@@ -160,11 +161,13 @@
 //    [self.navigationController pushViewController:detailViewController animated:YES];
     
     
-    NSDictionary *locationDic = [travelHistoryArray objectAtIndex:indexPath.row];
-    HistoryLocationsViewController *locationViewController = [[HistoryLocationsViewController alloc] initWithNibName:@"HistoryLocationsViewController" bundle:nil];
-    NSArray *locations = locationDic[@"locations"];
-    locationViewController.dataArray = locations;
-    [self.navigationController pushViewController:locationViewController animated:YES];
+    //NSDictionary *locationDic = [travelHistoryArray objectAtIndex:indexPath.row];
+    //HistoryLocationsViewController *locationViewController = [[HistoryLocationsViewController alloc] initWithNibName:@"HistoryLocationsViewController" bundle:nil];
+    //NSArray *locations = locationDic[@"locations"];
+    //locationViewController.dataArray = locations;
+    
+    TravelDetailViewController* travelDetailViewController = [[TravelDetailViewController alloc] initWithNibName:@"TravelDetailViewController" bundle:nil];
+    [self.navigationController pushViewController:travelDetailViewController animated:YES];
 
     
     
