@@ -84,10 +84,12 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(laNum.floatValue, longNum.floatValue);
         [self.mapView addAnnotation:pointAnnotation];
     }
-    
-    MKCoordinateRegion region = [self mapRegion];
-    [self.mapView setRegion:region animated:YES];
+    if (self.dataArray.count) {
+        MKCoordinateRegion region = [self mapRegion];
+        [self.mapView setRegion:region animated:YES];
 
+    }
+    
     
 }
 
