@@ -28,7 +28,6 @@
 	<string>CarTracing wants to track your driving</string>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string></string>
 		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

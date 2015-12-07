@@ -42,6 +42,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         
         //LocationManager
         locationManager = CLLocationManager()
+        locationManager.allowsBackgroundLocationUpdates = true
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.activityType = .AutomotiveNavigation

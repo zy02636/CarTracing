@@ -15,7 +15,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        
+//        if launchOptions?[UIApplicationLaunchOptionsLocationKey] != nil {
+//
+//        }
+//        if ([launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey]) {
+//            
+//            #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+//                [[MMLocationManager sharedManager] requestAlwaysAuthorization];
+//            #endif
+//            
+//            
+//            //这是iOS9中针对后台定位推出的新属性 不设置的话 可是会出现顶部蓝条的哦(类似热点连接)
+//            #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+//                [[MMLocationManager sharedManager] setAllowsBackgroundLocationUpdates:YES];
+//            #endif
+//            
+//            [[MMLocationManager sharedManager] startMonitoringSignificantLocationChanges];
+//        }
+        
+        
         return true
     }
 
