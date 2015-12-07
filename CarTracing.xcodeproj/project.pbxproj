@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C4519351C113D6F006A5C7E /* TravelHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4519341C113D6F006A5C7E /* TravelHistoryCell.xib */; };
+		2C4519381C1543C9006A5C7E /* TravelDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4519361C1543C9006A5C7E /* TravelDetailCell.swift */; };
+		2C4519391C1543C9006A5C7E /* TravelDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C4519371C1543C9006A5C7E /* TravelDetailCell.xib */; };
 		2C81726D1BE36F46001C2E65 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81726C1BE36F46001C2E65 /* AppDelegate.swift */; };
 		2C81726F1BE36F46001C2E65 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C81726E1BE36F46001C2E65 /* ViewController.swift */; };
 		2C8172721BE36F46001C2E65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8172701BE36F46001C2E65 /* Main.storyboard */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C4519341C113D6F006A5C7E /* TravelHistoryCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TravelHistoryCell.xib; sourceTree = "<group>"; };
+		2C4519361C1543C9006A5C7E /* TravelDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelDetailCell.swift; sourceTree = "<group>"; };
+		2C4519371C1543C9006A5C7E /* TravelDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TravelDetailCell.xib; sourceTree = "<group>"; };
 		2C8172691BE36F46001C2E65 /* CarTracing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarTracing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C81726C1BE36F46001C2E65 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C81726E1BE36F46001C2E65 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -157,11 +163,14 @@
 				2CA9A22D1BE8BB320049C497 /* CarTracing-Bridging-Header.h */,
 				8D59F39A1BE8C44E00FF924D /* TravelHistoryCell.h */,
 				8D59F39B1BE8C44E00FF924D /* TravelHistoryCell.m */,
+				2C4519341C113D6F006A5C7E /* TravelHistoryCell.xib */,
 				2CA399571BF9E9E3004F3EE3 /* HistoryLocationsViewController.swift */,
 				2CA399581BF9E9E3004F3EE3 /* HistoryLocationsViewController.xib */,
 				8D7231081C0DBC80008BDD36 /* TravelDetailViewController.h */,
 				8D7231091C0DBC80008BDD36 /* TravelDetailViewController.m */,
 				8D72310A1C0DBC80008BDD36 /* TravelDetailViewController.xib */,
+				2C4519361C1543C9006A5C7E /* TravelDetailCell.swift */,
+				2C4519371C1543C9006A5C7E /* TravelDetailCell.xib */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -277,11 +286,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4519351C113D6F006A5C7E /* TravelHistoryCell.xib in Resources */,
 				2C8172771BE36F46001C2E65 /* LaunchScreen.storyboard in Resources */,
 				2C8172741BE36F46001C2E65 /* Assets.xcassets in Resources */,
 				2CA3995A1BF9E9E3004F3EE3 /* HistoryLocationsViewController.xib in Resources */,
 				8D72310C1C0DBC80008BDD36 /* TravelDetailViewController.xib in Resources */,
 				2C8172721BE36F46001C2E65 /* Main.storyboard in Resources */,
+				2C4519391C1543C9006A5C7E /* TravelDetailCell.xib in Resources */,
 				2C81729E1BE370CE001C2E65 /* HistoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +320,7 @@
 			files = (
 				2C81729D1BE370CE001C2E65 /* HistoryViewController.swift in Sources */,
 				2C81726F1BE36F46001C2E65 /* ViewController.swift in Sources */,
+				2C4519381C1543C9006A5C7E /* TravelDetailCell.swift in Sources */,
 				2C81726D1BE36F46001C2E65 /* AppDelegate.swift in Sources */,
 				2CA399591BF9E9E3004F3EE3 /* HistoryLocationsViewController.swift in Sources */,
 				8D59F39D1BE8C44E00FF924D /* TravelHistoryCell.m in Sources */,

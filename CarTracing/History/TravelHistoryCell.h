@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface TravelHistoryCell : UITableViewCell
+@property (nonatomic, weak) IBOutlet UILabel* timeLabel;
+@property (nonatomic, weak) IBOutlet UILabel* distLabel;
+@property (nonatomic, weak) IBOutlet UILabel* costLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* imgView;
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+
 - (void)dealWithData:(NSDictionary *)dataDic;
 @end

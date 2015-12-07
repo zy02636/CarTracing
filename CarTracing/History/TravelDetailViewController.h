@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CarTracing-Swift.h"
 @interface TravelDetailViewController : UIViewController
-
+@property (nonatomic, strong) NSDictionary *dataDic;
 @end

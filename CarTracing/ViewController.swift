@@ -90,6 +90,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
                 //save location
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
+       
                 let locationDic = ["latitude": latitude, "longitude": longitude];
                 self.locations.append(locationDic)
             }
@@ -111,12 +112,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         let polyline = overlay as! MKPolyline
         let renderer = MKPolylineRenderer(polyline: polyline)
         renderer.strokeColor = UIColor.blueColor()
-        renderer.lineWidth = 7
+        renderer.lineWidth = 5
         return renderer
 
     }
-    
-
     
 
     //MARK : - Private Funcs
@@ -253,21 +252,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         //获取distance
         saveDic["distance"] = NSNumber(double: distance)
         
+        //图片存储并保存路径
+        let imgData = UIImagePNGRepresentation(imageFromView(mapView))
+        let documentsPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
         
-        let data = UIImagePNGRepresentation(imageFromView(mapView))
-        let fileManager = NSFileManager.defaultManager()
-        let fileName = NSString(format:"path_%d.png", CACurrentMediaTime())
-        let filePath = NSHomeDirectory().stringByAppendingString("/Documents/").stringByAppendingString(fileName as String)
-        if !fileManager.fileExistsAtPath(filePath) {
-            data?.writeToFile(filePath, atomically: true)
-            NSLog("%@", filePath)
-        }else {
-            
-        }
-        
-        //保存截图路径
+        let dat = NSDate(timeIntervalSinceNow: 0)
+        let timerInterval = dat.timeIntervalSince1970
+
+        let fileName = "/screenshot_\(timerInterval).png"
+        let filePath = documentsPath.stringByAppendingString(fileName)
+        imgData?.writeToFile(filePath, atomically: true)
         saveDic["image"] = filePath
-        //UIImageWriteToSavedPhotosAlbum(imageFromView(mapView), nil, nil, nil)
+        
+        
+        
+        
         
         let userDefault = NSUserDefaults.standardUserDefaults()
         var saveDataArray = [Dictionary<String, AnyObject>]()
@@ -283,14 +282,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         }
         
         
-        //写到document
-        let manager = NSFileManager.defaultManager()
-        let path = NSHomeDirectory().stringByAppendingString("Documents").stringByAppendingString("saveData.txt")
-        if manager.fileExistsAtPath(path) {
-        
-        }else {
-        
-        }
+//        //写到document
+//        let manager = NSFileManager.defaultManager()
+//        let path = NSHomeDirectory().stringByAppendingString("Documents").stringByAppendingString("saveData.txt")
+//        if manager.fileExistsAtPath(path) {
+//        
+//        }else {
+//        
+//        }
         
         
     }
@@ -299,7 +298,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func polyline() -> MKPolyline {
         var coords = [CLLocationCoordinate2D]()
-        
 
         for location in locations {
             coords.append(CLLocationCoordinate2D(latitude: location["latitude"]!,

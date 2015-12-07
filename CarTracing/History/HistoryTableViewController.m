@@ -16,7 +16,6 @@
 
 static NSString *cellIdentifier = @"TracelHistoryCell";
 
-
 @interface HistoryTableViewController ()
 
 @property (nonatomic, retain) NSMutableArray* travelHistoryArray;
@@ -43,7 +42,6 @@ static NSString *cellIdentifier = @"TracelHistoryCell";
     travelHistoryArray = [NSMutableArray arrayWithArray:[userDefault objectForKey:@"saveDataArray"]];
     [self.tableView reloadData];
     
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,12 +52,11 @@ static NSString *cellIdentifier = @"TracelHistoryCell";
 - (void)customSubViews {
     
     //Bar
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(backHome)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    
     //TableView
-    [self.tableView registerClass:[TravelHistoryCell class] forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerNib:[UINib nibWithNibName:@"TravelHistoryCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
 }
 
 
@@ -81,102 +78,16 @@ static NSString *cellIdentifier = @"TracelHistoryCell";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 250;
+    return 200;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    TravelHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
+    TravelHistoryCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
     [cell dealWithData:dataDic];
     return cell;
     
-    
-    
-    /*
-    NSString* reuseIdentifier = @"resueCell";
-    TravelHistoryCell *cell = (TravelHistoryCell*)[tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    
-    if (cell == nil) {
-        cell = [[TravelHistoryCell alloc] initWithReuseIdentifier:reuseIdentifier];
-    }
-    
-    NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
-    NSDate *finishTime    = [dataDic objectForKey:@"finish"];
-    NSString* distStr     = [[dataDic objectForKey:@"distance"] stringValue];
-    NSString* costStr     = [[dataDic objectForKey:@"seconds"] stringValue];
-
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSTimeZone *timeZone    = [NSTimeZone localTimeZone];
-    [formatter setTimeZone:timeZone];
-    [formatter setDateFormat : @"yyyy年M月d日 h点m分"];
-    NSString *stringTime    = [formatter stringFromDate:finishTime];
-    NSString* distFormatStr = [NSString stringWithFormat:@"跑了%@米", distStr];
-    NSString* costFormatStr = [NSString stringWithFormat:@"耗时%@秒", costStr];
-    
-    
-    UILabel* timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 200, 20)];
-    timeLabel.text = stringTime;
-    [timeLabel setFont:[UIFont systemFontOfSize:13]];
-    
-    UILabel* distLabel = [[UILabel alloc] initWithFrame:CGRectMake(190, 10, 50, 20)];
-    distLabel.text = distFormatStr;
-    [distLabel setFont:[UIFont systemFontOfSize:13]];
-    
-    UILabel* costLabel = [[UILabel alloc] initWithFrame:CGRectMake(250, 10, 150, 20)];
-    costLabel.text = costFormatStr;
-    [costLabel setFont:[UIFont systemFontOfSize:13]];
-    
-    UIImage* pathImg     = [UIImage imageWithContentsOfFile:[dataDic objectForKey:@"image"]];
-    UIImageView* imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 50, 200, 150)];
-    [imgView setImage:pathImg];
-    
-    [cell.contentView addSubview:distLabel];
-    [cell.contentView addSubview:costLabel];
-    [cell.contentView addSubview:timeLabel];
-    [cell.contentView addSubview:imgView];
-    
-    // Remove seperator inset
-    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
-        [cell setSeparatorInset:UIEdgeInsetsZero];
-    }
-    
-    // Prevent the cell from inheriting the Table View's margin settings
-    if ([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]) {
-        [cell setPreservesSuperviewLayoutMargins:NO];
-    }
-    
-    // Explictly set your cell's layout margins
-    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
-        [cell setLayoutMargins:UIEdgeInsetsZero];
-    }
-    return cell;
-     
-     
-     
-     */
-}
-
-
-
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-
-
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [self.travelHistoryArray removeObjectAtIndex:[indexPath row]];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -194,27 +105,16 @@ static NSString *cellIdentifier = @"TracelHistoryCell";
     //NSArray *locations = locationDic[@"locations"];
     //locationViewController.dataArray = locations;
     
+    
+    NSDictionary *dataDic = [travelHistoryArray objectAtIndex:indexPath.row];
     TravelDetailViewController* travelDetailViewController = [[TravelDetailViewController alloc] initWithNibName:@"TravelDetailViewController" bundle:nil];
+    travelDetailViewController.dataDic = dataDic;
     [self.navigationController pushViewController:travelDetailViewController animated:YES];
 
     
     
-
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation
