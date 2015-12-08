@@ -13,7 +13,8 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
 
 @interface TravelDetailViewController () <UITableViewDataSource,UITableViewDelegate, CLLocationManagerDelegate, MKMapViewDelegate>
 
-
+@property (nonatomic, weak) IBOutlet UILabel* startLocationLabel;
+@property (nonatomic, weak) IBOutlet UILabel* endLocationLabel;
 @property (nonatomic, weak) IBOutlet UILabel* timeLabel;
 @property (nonatomic, weak) IBOutlet UILabel* distLabel;
 @property (nonatomic, weak) IBOutlet UILabel* costLabel;
@@ -25,6 +26,11 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSString *startLocationDescription;
+@property (nonatomic, strong) NSString *endLocationDescription;
+
+@property (nonatomic, strong) MKPointAnnotation *startPointAnnotation;
+@property (nonatomic, strong) MKPointAnnotation *endPointAnnotation;
 @end
 
 @implementation TravelDetailViewController
@@ -75,7 +81,7 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
     
     //Map
     self.mapView.delegate = self;
-    
+
     for (NSDictionary *locationDic in self.dataArray) {
         NSNumber *laNum = locationDic[@"latitude"];
         NSNumber *longNum = locationDic[@"longitude"];
@@ -83,7 +89,9 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
         pointAnnotation = [[MKPointAnnotation alloc] init];
         pointAnnotation.coordinate = CLLocationCoordinate2DMake(laNum.floatValue, longNum.floatValue);
         [self.mapView addAnnotation:pointAnnotation];
+        
     }
+    
     if (self.dataArray.count) {
         MKCoordinateRegion region = [self mapRegion];
         [self.mapView setRegion:region animated:YES];
@@ -91,7 +99,61 @@ static NSString *cellIdentifier = @"HistoryLocationCell";
     }
     
     
+    if (self.dataArray.count > 1) {
+        NSDictionary *locationDic1 = [self.dataArray objectAtIndex:0];
+        NSDictionary *locationDic2 = [self.dataArray lastObject];
+        NSNumber *laNum1 = locationDic1[@"latitude"];
+        NSNumber *longNum1 = locationDic1[@"longitude"];
+        NSNumber *laNum2 = locationDic2[@"latitude"];
+        NSNumber *longNum2 = locationDic2[@"longitude"];
+        CLLocation *location1 = [[CLLocation alloc] initWithLatitude:laNum1.floatValue longitude:longNum1.floatValue];
+        CLLocation *location2 = [[CLLocation alloc] initWithLatitude:laNum2.floatValue longitude:longNum2.floatValue];
+        CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+        CLGeocoder *geoCoder2 = [[CLGeocoder alloc] init];
+        [geoCoder reverseGeocodeLocation:location1 completionHandler:^(NSArray *placemarks, NSError *error){
+            if (error){
+               
+            }else {
+                CLPlacemark *placeMark=[placemarks objectAtIndex:0];
+                self.startLocationLabel.text = [NSString stringWithFormat:@"起点：%@",placeMark.name];
+                self.startLocationLabel.backgroundColor = [UIColor whiteColor];
+            }
+        }];
+        
+        [geoCoder2 reverseGeocodeLocation:location2 completionHandler:^(NSArray *placemarks, NSError *error){
+            if (error){
+                
+            }else {
+                CLPlacemark *placeMark=[placemarks objectAtIndex:0];
+                self.endLocationLabel.text = [NSString stringWithFormat:@"终点：%@",placeMark.name];
+                self.endLocationLabel.backgroundColor = [UIColor whiteColor];
+            }
+        }];
+    }
+    
+    
 }
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKPinAnnotationView *pinView = nil;
+    
+    static NSString *defaultPinID = @"com.invasivecode.pin";
+    
+    pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+    
+    if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
+                                     
+                                     initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+    
+    pinView.pinTintColor = [UIColor blueColor];
+    
+    pinView.canShowCallout = YES;
+
+    pinView.animatesDrop = NO;
+    
+    return pinView;
+}
+
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
