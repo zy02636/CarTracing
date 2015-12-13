@@ -26,6 +26,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     var distance = 0.0
     var locations = [Dictionary<String, Double>]()
     var timer = NSTimer()
+    
+    //应用首次启动, 为了防止触发mapview的回调, tracing先设置成true
+    //用户开始点击按钮后, tracing与用户是否trace状态一致
+    var tracing = true;
 
     
     override func viewDidLoad() {
@@ -133,6 +137,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     //Add Region
     func addRegion() {
+        //模拟器首次启动写了保护, 一直崩溃受不了了...
+        //start trace的时候会再触发这个函数...
+        if (locationManager.location == nil) {
+            return;
+        }
         //Map Region
         mapView.showsUserLocation = true
         let theSpan = MKCoordinateSpanMake(0.05, 0.05)
@@ -167,19 +176,40 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             startLocationUpdates()
             
             startBtn.setTitle("Stop", forState: .Normal)
+            
+            locations.removeAll();
+            addRegion();
+            tracing = true;
         }else {
             timer.invalidate()
-            
             timeLabel.text = "Time: "
             distanceLabel.text = "Distance: "
-            
             stopLocationUpdates()
-            
-            saveRun()
-            
             startBtn.setTitle("Start", forState: .Normal)
+            
+            if (locations.count >= 1) {
+                let firstLoc = locations.first!;
+                let lastLoc  = locations.last!;
+                let minLatitude  = firstLoc["latitude"];
+                let minLongitude = firstLoc["longitude"];
+                
+                let maxLatitude  = lastLoc["latitude"];
+                let maxLongitude = lastLoc["longitude"];
+
+                let span       = MKCoordinateSpanMake(abs(maxLatitude! - minLatitude!) * 1.1, abs(maxLongitude! - minLongitude!) * 1.1);
+                let coordinate = CLLocationCoordinate2DMake((maxLatitude! + minLatitude!) / 2, (maxLongitude! + minLongitude!) / 2);
+                let region = MKCoordinateRegionMake(coordinate, span);
+                mapView.setRegion(region, animated: true);
+                tracing = false;
+            }
         }
 
+    }
+    
+    func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        if (!tracing){
+            saveRun()
+        }
     }
     
     
@@ -221,6 +251,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     //Refresh UI perSecond
     func eachSecond(timer: NSTimer) {
+        mapView.setCenterCoordinate(CLLocationCoordinate2D(latitude:locations[locations.count - 1]["latitude"]!,
+            longitude:locations[locations.count - 1]["longitude"]!), animated: true);
+        
         seconds++
         let secondsQuantity = HKQuantity(unit: HKUnit.secondUnit(), doubleValue: seconds)
         timeLabel.text = "Time: " + secondsQuantity.description
@@ -266,9 +299,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         saveDic["image"] = filePath
         
         
-        
-        
-        
         let userDefault = NSUserDefaults.standardUserDefaults()
         var saveDataArray = [Dictionary<String, AnyObject>]()
         if let getSaveDataArray = userDefault.objectForKey("saveDataArray") as? [Dictionary<String, AnyObject>] {
@@ -311,7 +341,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     
     func loadMap() {
         if locations.count > 0 {
-
             mapView.removeOverlays(mapView.overlays)
             
             // Set the map bounds
